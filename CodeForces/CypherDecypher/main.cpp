@@ -11,7 +11,7 @@ int main()
 {
     std::cin.tie(0);
     std::ios_base::sync_with_stdio(false);
-    bool primos[LIM_SUP + 2] = { true };
+    bool primos[LIM_SUP + 2];
     IniciarCriba(primos);
     int t,i,j;
     cin >> t;
@@ -24,6 +24,7 @@ int main()
 
 void IniciarCriba(bool criba[])
 {
+    for(int i = 0; i <= LIM_SUP; ++i) criba[i] = true;
     for(int i = 2; i <= LIM_SUP; ++i){
         if(criba[i]){
             for(int j = i*2; j <= LIM_SUP; j+=i)
