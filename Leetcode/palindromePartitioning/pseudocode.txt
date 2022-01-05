@@ -1,0 +1,166 @@
+Dado una cadena s retornar las posibles formas de dividir 
+la cadena tal que cada una de las cadenas más pequeñas sea un palindromo.
+
+Restricciones: 
+ Longitud maxima = 16
+
+Ejemplos:
+str = ababa
+// -> a , b, a, b , a  <- Particion más facil <- Part = [1,2,3,4,5]
+// -> aba , b , a  <- 2 Part = [3,4,5]
+// -> a , bab, a   <- 3 Part = [1,4,5]
+// -> a, b , aba   <- 4 Part = [1,2,5]
+
+con aab ... 
+
+Primera llamada: 
+sr = aab
+particiones = []
+i = 0
+r = [[]] 
+
+1 it de la primera llamada
+sr = aab
+particiones = []
+i = 0
+r = [[]] 
+aux = "a"   <- Aux es palindromo, !Recurcion
+
+    Segunda llamada: 
+    sr = aab
+    particiones = ['a']
+    i = 1
+    r = [[]] 
+
+    1 it de la segunda llamada
+    sr = aab
+    particiones = ['a']
+    i = 1
+    r = [[]] 
+    aux = "a"   <- Aux es palindromo, !Recurcion
+
+        Terera llamada: 
+        sr = aab
+        particiones = ['a','a']
+        i = 2
+        r = [[]] 
+
+        1 it de la Tercera llamada
+        sr = aab
+        particiones = ['a','a']
+        i = 2
+        r = [[]] 
+        aux = "b"   <- Aux es palindromo, !Recurcion
+
+            Cuarta llamada: 
+            sr = aab
+            particiones = ['a','a', 'b']
+            i = 3  <- i es igual a sr.lenght 
+            r = [[]] <- Se mete 'particion' en 'r' 
+
+        2 it de la Tercera llamada
+        sr = aab
+        particiones = ['a','a']
+        i = 3 <- FINAL se regresa a la llamada anterior
+        r = [['a','a','b']] 
+        aux = "b$"
+
+    2 it de la segunda llamada
+    sr = aab
+    particiones = ['a']
+    i = 2 <- 
+    r = [['a','a','b']]
+    aux = "ab"
+
+    3 it de la segunda llamada
+    sr = aab
+    particiones = ['a']
+    i = 3 <- Final 
+    r = [['a','a','b']]
+    aux = "ab"
+
+1 it de la primera llamada
+sr = aab
+particiones = []
+i = 1
+r = [['a','a','b']] 
+aux = "aa"   <- Aux es palindromo, !Recurcion...
+
+***********************************************************************************************
+/** Brief: Crea y añade todas las posibles particiones de la cadena.
+* Param sr: La cadena a partir.
+* Param particiones Las subCadenas que ya son palindromos
+* Param i El indice del primer caracter que no es parte del palindromo 
+* Param r La variable con el resultado
+*/
+def void CrearParticiones(const string &sr , Vector<String> &particiones, int i, vectir<vectir<Strings>> &r ){
+{
+  Si el indice de la cadena es igual al tamaño de la misma:
+    Mete particiones al arreglo de arreglos de palindromos.
+    Regresa
+
+  Declarar cadena auxiliar vacía
+  Por cada caracter en la cadena empezando desde i:
+    Mete el caracter a la cadena auxiliar //-> aux = 'b'
+    si la cadena auxiliar es palindromo:
+      Mete la cadena auxiliar en particiones //-> particiones = ['a', 'ab', 'b']
+      Crea todas las posibles particiones a partir del estado actual de la cadena auxiliar 
+        //-> CrearParticiones(sr,particiones, indice del caracter + 1, r);
+      Quita auxiliar de particiones //-> particiones = []
+}
+***********************************************************************************************
+
+//Busqueda a profundidad
+CrearParticiones()
+{
+    if(i == sr.lenght ) 
+      r += particiones
+      return; 
+
+    aux = ""
+    for( i ; i < sr.length ; ++i)
+    {
+        aux += sr[i];
+        if(esPalindromo(aux) )
+        {
+            particiones += aux;
+            CrearParticiones(sr,particiones i+1,r);
+            particiones -= aux;
+        } 
+    }      
+}
+//Fin busqueda a profundidad
+
+CrearParticiones("aab")
+'a', 'a' , 'b'
+'a', 'ab'
+'aa', 'b'
+'aab'
+
+CrearParticiones("abab")
+'a', 'b' , 'a' , 'b' 
+'a', 'b' , 'ab' 
+'a', 'ba' , 'b' 
+'a', 'bab'
+'ab', 'b' , 'a'
+'ab', 'ba'
+'aba', 'a'
+'abab'
+
+
+                                 'a', 'b' , 'a' , 'b' 
+         'a', 'b' , 'ab'               'ab', 'b' , 'a', 'b','b'      'aba', 'a' 
+'a', 'ba' , 'b'      'a', 'bab'     'ab', 'ba'                   
+
+***********************************************************************************************
+/** Brief: Verifica que la cadena sea un palindromo.
+* Param sr: Cadena a verificar palindromo.
+* Return: true si la cadena es un palindromo.
+*/
+def bool esPalindromo( string sr ){ 
+  Por cada indice desde cero hasta la mitad de la cadena:
+    Compara el caracter en el indice i con el caracter en el indice 'tamaño - i - 1'
+    Si son distintos devuelve falso
+  Devuelve verdadero
+}
+***********************************************************************************************
