@@ -1,5 +1,6 @@
 Dado una cadena s retornar las posibles formas de dividir 
 la cadena tal que cada una de las cadenas más pequeñas sea un palindromo.
+BUSQUEDA A PROFUNDIDAD CON UNA PODA.
 
 Restricciones: 
  Longitud maxima = 16
@@ -101,12 +102,11 @@ def void CrearParticiones(const string &sr , Vector<String> &particiones, int i,
 
   Declarar cadena auxiliar vacía
   Por cada caracter en la cadena empezando desde i:
-    Mete el caracter a la cadena auxiliar //-> aux = 'b'
+    Mete el caracter a la cadena auxiliar
     si la cadena auxiliar es palindromo:
-      Mete la cadena auxiliar en particiones //-> particiones = ['a', 'ab', 'b']
+      Mete la cadena auxiliar en particiones
       Crea todas las posibles particiones a partir del estado actual de la cadena auxiliar 
-        //-> CrearParticiones(sr,particiones, indice del caracter + 1, r);
-      Quita auxiliar de particiones //-> particiones = []
+      Quita auxiliar de particiones
 }
 ***********************************************************************************************
 
