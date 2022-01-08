@@ -1,0 +1,91 @@
+You are given a rows x cols matrix grid representing a field of cherries where grid[i][j] 
+represents the number of cherries that you can collect from the (i, j) cell.
+
+You have two robots that can collect cherries for you:
+
+Robot #1 is located at the top-left corner (0, 0), and
+Robot #2 is located at the top-right corner (0, cols - 1).
+Return the maximum number of cherries collection using both robots by following the rules below:
+
+From a cell (i, j), robots can move to cell (i + 1, j - 1), (i + 1, j), or (i + 1, j + 1).
+When any robot passes through a cell, It picks up all cherries, and the cell becomes an empty cell.
+When both robots stay in the same cell, only one takes the cherries.
+Both robots cannot move outside of the grid at any moment.
+Both robots should reach the bottom row in grid.
+
+Constraints:
+rows == grid.length
+cols == grid[i].length
+2 <= rows, cols <= 70
+0 <= grid[i][j] <= 100
+
+*****************************************************************************************************
+
+/** Brief: Calcula el numero mayor de cherries recolectados en una trayectoria con un robot.
+* Param posX: Fila actual donde se encuentra el robot.
+* Param posY: Columna actual donde se encuentra el robot.
+* Param cuenta: La cuenta actual de cherries recogida por el robot. 
+* Param respuesta: El total de cherries obtenido por el robot.
+* Param memoria: La mayor cantidad que hemos logrado alcanzar estando en la rama i,j
+*/
+def void Busqueda(int posX, int posY, int cuenta, int &respuesta, int &memoria[][])
+{
+  Actualiza la cuenta a sumarle los cherries de la casilla actual del robot.
+
+  // Eficientiza el programa.
+  Si la memoria en la posición actual es cero:
+    Guarda en memoria la cuenta.
+  Si no: // Ya hemos pasado por lo menos una vez.
+    Si la cuenta es menor o igual a la memoria en esa posición: // Ya sabemos de antemano el resultado
+      retorna
+
+  Si el robot se encuentra en la última fila:
+    La respuesta toma el mayor valor entre la cuenta y la respuesta
+    Retorna
+
+  Camina hacia la siguiente fila con la cuenta actual y el total de cherries.
+
+  Si el robot no se encuentra en la última columna:
+    Camina hacia la casilla diagonal derecha de la siguiente fila.
+  Si el robot no se encuentra en la primera columna:
+    Camina hacia la casilla diagonal izquierda de la siguiente fila.
+}
+
+
+
+/** Brief: Calcula el numero mayor de cherries recolectados en una trayectoria con dos robots.
+* Param pos1X: Fila actual donde se encuentra el robot.
+* Param pos1Y: Columna actual donde se encuentra el robot.
+* Param pos2X: Fila actual donde se encuentra el robot.
+* Param pos2Y: Columna actual donde se encuentra el robot.
+* Param cuenta: La cuenta actual de cherries recogida por el robot. 
+* Param respuesta: El total de cherries obtenido por el robot.
+*/
+def void BusquedaEntre2(int rob1X, int rob1Y, int rob2X, int rob2Y, int cuenta, int &respuesta,
+  inr memoria[][][][])
+{
+
+  if(rob1Y < 0 || rob1Y > ULTIMACOLUMNA) Return;
+  if(rob2Y < 0 || rob2Y > ULTIMACOLUMNA) Return;
+  if(rob1Y == rob2Y ) return;
+
+  Actualiza la cuenta a sumarle los cherries de la casilla actual de los robot.
+
+  if(memoria[rob1X][rob1Y][rob2X][rob2Y] == 0 ) memoria[rob1X][rob1Y][rob2X][rob2Y] = cuenta;
+  else 
+    (if  cuenta <= memoria[rob1X][rob1Y][rob2X][rob2Y] ) return; 
+    else memoria[rob1X][rob1Y][rob2X][rob2Y] = cuenta;
+
+
+  Busqueda (rob1X+1,rob1Y, rob2X+1,rob2Y);
+  Busqueda (rob1X+1,rob1Y, rob2X+1,rob2Y+1);
+  Busqueda (rob1X+1,rob1Y, rob2X+1,rob2Y-2);
+  
+  Busqueda (rob1X+1,rob1Y-1 ,rob2X+1,rob2Y);
+  Busqueda (rob1X+1,rob1Y-1 ,rob2X+1,rob2Y+1);
+  Busqueda (rob1X+1,rob1Y-1 ,rob2X+1,rob2Y-1);
+
+  Busqueda (rob1X+1,rob1Y+1 , rob2X+1,rob2Y);
+  Busqueda (rob1X+1,rob1Y+1 , rob2X+1,rob2Y+1);
+  Busqueda (rob1X+1,rob1Y+1 , rob2X+1,rob2Y-1);
+}
