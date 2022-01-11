@@ -1,0 +1,17 @@
+int BusquedaBinaria(int aBuscar,int tamArr,int arr[])
+{
+    int inf(1),sup(tamArr),mit;
+    while(sup >= inf)
+    {
+        mit = (inf + sup)/2; //<- inf + (sup-inf)/2 Evita Overflow
+
+        if(arr[mit] == aBuscar) return mit;
+        else
+        {
+            if(arr[mit] > aBuscar) sup = mit-1;
+            else inf = mit+1;
+        }
+
+    }
+    return 0; //Return inf o sup para encontrar un valor cercano(Tal vez sea mejor usar punto medio...)
+}

@@ -1,0 +1,15 @@
+void PuntoMedio(int aBuscar, int F() , int *RInf, int *RSup)
+{
+    int mit;
+    while(RSup > (RInf//+x) ) X = El error aceptado
+    {
+        mit = (RInf + (RSup )/2; //<- RInf + (RSup-RInf)/2 Evita Overflow
+
+        //if(F(mit) == aBuscar) return mit; solo si el valor es unico o solo se necesita un valor
+        //Si F es creciente se usa '>', si F es decreciente se usa '<'
+        if(F(mit) > aBuscar) RSup = mit; //Busca la ultima ocurrencia 
+        else RInf = mit; 		// Si se voltea la desicion y el 'else', busca la (Primera ocurrencia)
+     
+    }
+    return ; //Regresa un rango de valores (Un par)
+}
